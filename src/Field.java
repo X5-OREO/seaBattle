@@ -41,7 +41,7 @@ public class Field {
 		for (int i = 0; i < fieldSize; i++) {
 			for (int j = 0; j < fieldSize; j++) {
 
-				if (true) {
+				if (!isComputerField) {
 					if (cells[i][j] == 1) {
 						g.setColor(Color.RED);
 						g.fillRect(leftIndent + j * cellSize, topIndent + i * cellSize, cellSize, cellSize);
@@ -81,20 +81,32 @@ public class Field {
 			cells[y][x]=2;
 			searchKilledShips();
 			return 1;
-		}else if(cells[y][x] == 2 || cells[y][x]==3 || cells[y][x] == -2){
-			return 1;
+		}else if(cells[y][x] == 2){
+			return 2;
+		}else if(cells[y][x]==3 || cells[y][x] == -2){
+			return 3;
 		}else {
 			cells[y][x]= -2;
 			return 0;
 		}
 	}
+	public int countOfDamageShipCells() {
+		int count = 0;
+		for(int i = 0;i < fieldSize;i++) {
+			for(int j = 0;j < fieldSize;j++) {
+				if(cells[i][j] == 2) {
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+	
 	public void searchKilledShips() {
 		for(int i=0;i < 10;i ++) {
 			ships[i].kill(cells);
 		}
-	}
-	
-
-			
+	}	
 		}
-
+		
